@@ -2,7 +2,7 @@
 #PBS -l select=1:ncpus=64:mem=1950gb,walltime=72:00:00
 #PBS -q bigmem
 
-cd $PBS_O_WORKDIR
+# cd $PBS_O_WORKDIR
 
 
 echo $1
