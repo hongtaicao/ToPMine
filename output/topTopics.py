@@ -6,9 +6,13 @@ h = open('topicalPhrases.txt','w')
 phrases = [{} for i in range(100)]
 for line in f:
     line = line.strip().split(',')
-    topics = g.readline().split(',')
+    topics = g.readline().strip().split(',')
     for i in range(len(line)):
+        if i > len(topics):
+            break
         topic = topics[i]
+        if not topic:
+            break
         phrase = line[i]
         phrase = phrase.split(" ")
         #greater than 1 means phrase == 1 means unigram
@@ -28,4 +32,3 @@ for topic in range(len(phrases)):
         for i in range(min(50000000,len(top))):
             cand = top[i]
             h.write(" ".join(cand[0])+"\t"+str(cand[1])+"\n")
-

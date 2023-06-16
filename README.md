@@ -80,6 +80,7 @@ Yanglei Song (ysong44@illinois.edu)
 * Execute run.sh using command ``./run.sh <absolute-path-to-corpus>``.
 
 ## comment error
+### Input Document Format
 * Line #1 does not match regex.
 ```
 ./run.sh /home/hongt/ToPMine/Scottish.txt
@@ -134,3 +135,38 @@ A Scottish restaurant in a very grand setting in the centre of town. The food is
 2 . Howies is a local chain with a number of restaurants in Edinburgh, it specialises in modern British/Scottish cuisine and proves itself to be popular with both locals and tourists.
 ```
 * The provided sample corpus is very small and therefore the default min support ``minsup`` (``TopicalPhrases/runDataPreparation.sh``) might be too high, and causes exceptions for other commands in ``run.sh``.
+
+## Input Special Character
+* see the following errors from ``output/topTopics.py``
+```
+err: [2609]
+err: [1443]
+err: [4472]
+err: [1443]
+err: [1443]
+err: [3571]
+err: [1443]
+err: [250]
+err: [3626]
+Traceback (most recent call last):
+  File "/home/hongt/ToPMine/output/./topTopics.py", line 17, in <module>
+    if phrase in phrases[int(topic)]:
+ValueError: invalid literal for int() with base 10: '\n'
+mkdir: cannot create directory ‘outputFiles’: File exists
+hongt@DESKTOP-CSV9FU4:~/ToPMine$
+```
+* the error is caused by bad format of data processing files, e.g., input_dataset/input_stemMapping
+* ``output/outputFiles/corpus.txt`` and ``output/outputFiles/topics.txt`` line length mismatch and bad format
+* a quick fix for ``output/topTopics.py``, starting from line 9
+```python
+    topics = g.readline().strip().split(',')
+    for i in range(len(line)):
+        if i > len(topics):
+            break
+        topic = topics[i]
+        if not topic:
+            break
+        phrase = line[i]
+        phrase = phrase.split(" ")
+        #greater than 1 means phrase == 1 means unigram
+```

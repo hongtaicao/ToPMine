@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "topTopics.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "cwd": "${fileDirname}/outputFiles",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "unMapper.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "input_dataset/input_vocFile",
+                "input_dataset/input_stemMapping",
+                "input_dataset_output/unmapped_phrases",
+                "input_dataset_output/input_partitionedTraining.txt",
+                "input_dataset_output/newPartition.txt"
+            ],
+            "purpose": [
+                "debug-in-terminal"
+            ], // required to pass args to python script
+            "cwd": "${fileDirname}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}
